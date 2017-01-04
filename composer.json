@@ -1,0 +1,17 @@
+{
+    "name": "pmvc-theme/lucency_html",
+    "description": "Lucency Theme",
+    "type": "library",
+    "keywords": ["lucency", "theme", "pmvc"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Hill",
+            "email": "hill@kimo.com"
+        }
+    ],
+    "require": {
+        "pmvc-plugin/view_html": "*"
+    },
+    "minimum-stability": "dev"
+}
