@@ -4,7 +4,7 @@
 [![License](https://poser.pugx.org/pmvc-theme/lucency_html/license)](https://packagist.org/packages/pmvc-theme/lucency_html)
 [![Total Downloads](https://poser.pugx.org/pmvc-theme/lucency_html/downloads)](https://packagist.org/packages/pmvc-theme/lucency_html) 
 
-# PMVC Hello World react.js theme 
+# Lucency Html Skin 
 ===============
 
 ## Install with Composer
