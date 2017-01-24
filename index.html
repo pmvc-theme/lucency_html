@@ -1,7 +1,27 @@
 lucency
+<?php
+$fbPixelUrl = $this->get('fbPixelUrl');
+$gtagId = $this->get('gtagId');
+?>
+
+
+<?php if (!empty($fbPixelUrl)) {?>
+<!-- FB Pixel -->
 <img
     height="1"
     width="1"
     style="display:none"
-    src="<?php echo $this->get('fbPixelUrl')?>"
+    src="<?php echo $fbPixelUrl?>"
 />
+<!-- End FB Pixel -->
+<?php }?>
+
+<?php if (!empty($gtagId)) {?>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl+'<?php echo $this->get('gtagEnv')?>';f.parentNode.insertBefore(j,f);
+})(parent.window,parent.document,'script','dataLayer','<?php echo $gtagId?>');</script>
+<!-- End Google Tag Manager -->
+<?php }?>
