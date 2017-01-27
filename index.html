@@ -3,11 +3,11 @@ namespace PMVC\Theme\lucency_html;
 $fbPixelUrl = $this->get('fbPixelUrl');
 $gtagId = $this->get('gtagId');
 $gtagParams = $this->get('gtagParams');
-$dlKey = uniqid('dl'); 
+$dlKey = uniqid('dl');
 ?>
-
-lucency
-
+<html>
+<head><link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon"></head>
+<body>[ !!lucency!! ]
 <?php if (!empty($fbPixelUrl)) {?>
 <!-- FB Pixel -->
 <img
@@ -17,7 +17,7 @@ lucency
     src="<?php echo $fbPixelUrl?>"
 />
 <!-- End FB Pixel -->
-<?php }?>
+<?php flush();}?>
 
 <?php if (!empty($gtagId)) {?>
 <!-- Google Tag Manager -->
@@ -32,5 +32,5 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(parent.window,parent.document,'script','<?php echo $dlKey?>','<?php echo $gtagId?>');
 </script>
 <!-- End Google Tag Manager -->
-<?php }?>
-
+<?php flush();}?>
+</body></html>
