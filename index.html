@@ -22,7 +22,19 @@ $dlKey = uniqid('dl');
 <?php if (!empty($gtagId)) {?>
 <!-- Google Tag Manager -->
 <?php if (!empty($gtagParams)) {?>
-<script>parent.window.<?php echo $dlKey?> = [<?php echo json_encode($gtagParams)?>];</script>
+<script>
+(function(key,w,d){
+    var params = <?php echo json_encode($gtagParams)?>;
+    params.eventCallback = function() {
+        delete w[key];
+        var script = d.querySelector('script[src*="'+key+'"]');
+        script.parentNode.removeChild(script);
+        script = d.querySelector('script[src*="google-analytics.com/analytics.js"]');
+        script.parentNode.removeChild(script);
+    }
+    w[key] = [params];
+})('<?php echo $dlKey?>', parent.window, parent.document);
+</script>
 <?php }?>
 <script>
 (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
