@@ -19,30 +19,41 @@ $dlKey = uniqid('dl');
 <!-- End FB Pixel -->
 <?php flush();}?>
 
-<?php if (!empty($gtagId)) {?>
-<!-- Google Tag Manager -->
-<?php if (!empty($gtagParams)) {?>
 <script>
-(function(key,w,d){
+<?php if (!empty($gtagId)) {?>
+if ('undefined' === typeof dlKey) {
+    var dlKey = '<?php echo $dlKey?>';
+    var first = true;
+}
+<?php }?>
+
+<?php if (!empty($gtagParams)) {?>
+<!-- Google Tag Params -->
+(function(w,d,l){
     var params = <?php echo json_encode($gtagParams)?>;
     params.eventCallback = function() {
-        delete w[key];
-        var script = d.querySelector('script[src*="'+key+'"]');
-        script.parentNode.removeChild(script);
-        script = d.querySelector('script[src*="google-analytics.com/analytics.js"]');
-        script.parentNode.removeChild(script);
     }
-    w[key] = [params];
-})('<?php echo $dlKey?>', parent.window, parent.document);
-</script>
+    if (!w[l]) {
+        w[l] = [params];
+    } else {
+        w[l].push(params);
+    }
+})(parent.window, parent.document, dlKey);
+<!-- End Google Tag Params -->
 <?php }?>
-<script>
-(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl+'<?php echo $this->get('gtagEnv')?>';f.parentNode.insertBefore(j,f);
-})(parent.window,parent.document,'script','<?php echo $dlKey?>','<?php echo $gtagId?>');
+
+<?php if (!empty($gtagId)) {?>
+if (first) {
+    <!-- Google Tag Manager -->
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl+'<?php echo $this->get('gtagEnv')?>';f.parentNode.insertBefore(j,f);
+    })(parent.window, parent.document, 'script', dlKey, '<?php echo $gtagId?>');
+    <!-- End Google Tag Manager -->
+    first = false;
+}
+<?php }?>
 </script>
-<!-- End Google Tag Manager -->
-<?php flush();}?>
+<?php flush();?>
 </body></html>
