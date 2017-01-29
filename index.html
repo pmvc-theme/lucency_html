@@ -1,59 +1,6 @@
-<?php
-namespace PMVC\Theme\lucency_html;
-$fbPixelUrl = $this->get('fbPixelUrl');
-$gtagId = $this->get('gtagId');
-$gtagParams = $this->get('gtagParams');
-$dlKey = uniqid('dl');
-?>
 <html>
 <head><link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon"></head>
 <body>[ !!lucency!! ]
-<?php if (!empty($fbPixelUrl)) {?>
-<!-- FB Pixel -->
-<img
-    height="1"
-    width="1"
-    style="display:none"
-    src="<?php echo $fbPixelUrl?>"
-/>
-<!-- End FB Pixel -->
-<?php flush();}?>
-
-<script>
-<?php if (!empty($gtagId)) {?>
-if ('undefined' === typeof dlKey) {
-    var dlKey = '<?php echo $dlKey?>';
-    var first = true;
-}
-<?php }?>
-
-<?php if (!empty($gtagParams)) {?>
-<!-- Google Tag Params -->
-(function(w,d,l){
-    var params = <?php echo json_encode($gtagParams)?>;
-    params.eventCallback = function() {
-    }
-    if (!w[l]) {
-        w[l] = [params];
-    } else {
-        w[l].push(params);
-    }
-})(parent.window, parent.document, dlKey);
-<!-- End Google Tag Params -->
-<?php }?>
-
-<?php if (!empty($gtagId)) {?>
-if (first) {
-    <!-- Google Tag Manager -->
-    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl+'<?php echo $this->get('gtagEnv')?>';f.parentNode.insertBefore(j,f);
-    })(parent.window, parent.document, 'script', dlKey, '<?php echo $gtagId?>');
-    <!-- End Google Tag Manager -->
-    first = false;
-}
-<?php }?>
-</script>
-<?php flush();?>
+<?php include 'fb_pixel.html'?>
+<?php include 'google_tag.html'?>
 </body></html>

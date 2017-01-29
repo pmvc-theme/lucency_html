@@ -1,0 +1,14 @@
+<?php
+namespace PMVC\Theme\lucency_html;
+$fbPixelUrl = $this->get('fbPixelUrl');
+if (!empty($fbPixelUrl)) {
+?>
+<!-- FB Pixel -->
+<img
+    height="1"
+    width="1"
+    style="display:none"
+    src="<?php echo $fbPixelUrl?>"
+/>
+<!-- End FB Pixel -->
+<?php flush();}?>

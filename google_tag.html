@@ -1,0 +1,43 @@
+<?php
+namespace PMVC\Theme\lucency_html;
+$gtagId = $this->get('gtagId');
+$gtagParams = $this->get('gtagParams');
+$dlKey = uniqid('dl');
+?>
+<script>
+<?php if (!empty($gtagId)) {?>
+if ('undefined' === typeof dlKey) {
+    var dlKey = '<?php echo $dlKey?>';
+    var first = true;
+}
+<?php }?>
+
+<?php if (!empty($gtagParams)) {?>
+<!-- Google Tag Params -->
+(function(w,d,l){
+    var params = <?php echo json_encode($gtagParams)?>;
+    params.eventCallback = function() {
+    }
+    if (!w[l]) {
+        w[l] = [params];
+    } else {
+        w[l].push(params);
+    }
+})(parent.window, parent.document, dlKey);
+<!-- End Google Tag Params -->
+<?php }?>
+
+<?php if (!empty($gtagId)) {?>
+if (first) {
+    <!-- Google Tag Manager -->
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl+'<?php echo $this->get('gtagEnv')?>';f.parentNode.insertBefore(j,f);
+    })(parent.window, parent.document, 'script', dlKey, '<?php echo $gtagId?>');
+    <!-- End Google Tag Manager -->
+    first = false;
+}
+<?php }?>
+</script>
+<?php flush();?>
