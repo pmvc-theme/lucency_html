@@ -1,6 +1,10 @@
 <html>
 <head><link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon"></head>
 <body>[ !!lucency!! ]
-<?php include 'fb_pixel.html'?>
-<?php include 'google_tag.html'?>
+<?php
+$enabled = $this->get('enabled');
+foreach($enabled as $name) {
+    include($name.'.html');
+}
+?>
 </body></html>
