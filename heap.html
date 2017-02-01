@@ -4,7 +4,7 @@ $heapId = $this->get('heapId');
 // https://heapanalytics.com/docs/custom-api#track
 $heapParams = $this->get('heapParams');
 $heapProperties = $this->get('heapProperties');
-$action = $this->get('action');
+$event = $this->get('event');
 $b = $this->get('b');
 ?>
 <?php if (!empty($heapId)) {?>
@@ -18,12 +18,10 @@ if ('undefined' === typeof heap) {
 </script>
 <?php }?>
 
-<?php if (!empty($heapParams) || 'pageview' === $action) {?>
 <script type="text/javascript">
 (function(){
     var params = <?php echo json_encode($heapParams)?>;
     params.location = decodeURIComponent(parent.document.URL);
-    heap.track('<?php echo $action?>', params);
+    heap.track('<?php echo $event?>', params);
 })();
 </script>
-<?php }?>
