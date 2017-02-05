@@ -5,6 +5,7 @@ $gtagParams = $this->get('gtagParams');
 $dlKey = uniqid('dl');
 $parent = $this->get('disableIframe') ? '' : 'parent.';
 ?>
+<!-- Google Tag Manager -->
 <script>
 <?php if (!empty($gtagId)) {?>
 if ('undefined' === typeof dlKey) {
@@ -14,7 +15,7 @@ if ('undefined' === typeof dlKey) {
 <?php }?>
 
 <?php if (!empty($gtagParams)) {?>
-<!-- Google Tag Params -->
+// <!-- Google Tag Params -->
 (function(w,d,l){
     var params = <?php echo json_encode($gtagParams)?>;
     params.eventCallback = function() {
@@ -25,20 +26,21 @@ if ('undefined' === typeof dlKey) {
         w[l].push(params);
     }
 })(<?php echo $parent?>window, <?php echo $parent?>document, dlKey);
-<!-- End Google Tag Params -->
+// <!-- End Google Tag Params -->
 <?php }?>
 
 <?php if (!empty($gtagId)) {?>
+// <!-- Google Tag Init -->
 if (first) {
-    <!-- Google Tag Manager -->
     (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     'https://www.googletagmanager.com/gtm.js?id='+i+dl+'<?php echo $this->get('gtagEnv')?>';f.parentNode.insertBefore(j,f);
     })(<?php echo $parent?>window, <?php echo $parent?>document, 'script', dlKey, '<?php echo $gtagId?>');
-    <!-- End Google Tag Manager -->
     first = false;
 }
+// <!-- End Google Tag Init -->
 <?php }?>
 </script>
+<!-- End Google Tag Manager -->
 <?php flush();?>

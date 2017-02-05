@@ -6,7 +6,9 @@ $heapParams = $this->get('heapParams');
 $heapProperties = $this->get('heapProperties');
 $event = $this->get('event');
 $b = $this->get('b');
+$parent = $this->get('disableIframe') ? '' : 'parent.';
 ?>
+<!-- Heap -->
 <?php if (!empty($heapId)) {?>
 <script type="text/javascript">
 if ('undefined' === typeof heap) {
@@ -21,7 +23,9 @@ if ('undefined' === typeof heap) {
 <script type="text/javascript">
 (function(){
     var params = <?php echo json_encode($heapParams)?>;
-    params.location = decodeURIComponent(parent.document.URL);
+    params.location = decodeURIComponent(<?php echo $parent?>document.URL);
     heap.track('<?php echo $event?>', params);
 })();
 </script>
+<!-- End Heap -->
+<?php flush();?>
