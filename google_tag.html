@@ -3,6 +3,7 @@ namespace PMVC\Theme\lucency_html;
 $gtagId = $this->get('gtagId');
 $gtagParams = $this->get('gtagParams');
 $dlKey = uniqid('dl');
+$parent = $this->get('disableIframe') ? '' : 'parent.';
 ?>
 <script>
 <?php if (!empty($gtagId)) {?>
@@ -23,7 +24,7 @@ if ('undefined' === typeof dlKey) {
     } else {
         w[l].push(params);
     }
-})(parent.window, parent.document, dlKey);
+})(<?php echo $parent?>window, <?php echo $parent?>document, dlKey);
 <!-- End Google Tag Params -->
 <?php }?>
 
@@ -34,7 +35,7 @@ if (first) {
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     'https://www.googletagmanager.com/gtm.js?id='+i+dl+'<?php echo $this->get('gtagEnv')?>';f.parentNode.insertBefore(j,f);
-    })(parent.window, parent.document, 'script', dlKey, '<?php echo $gtagId?>');
+    })(<?php echo $parent?>window, <?php echo $parent?>document, 'script', dlKey, '<?php echo $gtagId?>');
     <!-- End Google Tag Manager -->
     first = false;
 }
