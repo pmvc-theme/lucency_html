@@ -4,6 +4,7 @@
 <?php
 $enabled = $this->get('enabled');
 foreach($enabled as $name) {
+    $file = __DIR__.'/'.$name.'.html';
     \PMVC\l($file);
 }
 ?>
