@@ -1,12 +1,18 @@
 <?php
+
 namespace PMVC\Theme\lucency_html;
-$heapId = $this->get('heapId');
+
+$view = \PMVC\plug('view');
+
+$heapData = \PMVC\value($view->get('data'), ['lucency', 'heap']);
+$heapId = \PMVC\get($heapData, 'id');
 // https://heapanalytics.com/docs/custom-api#track
-$heapParams = $this->get('heapParams');
-$heapProperties = $this->get('heapProperties');
-$event = $this->get('event');
-$b = $this->get('b');
-$parent = $this->get('disableIframe') ? '' : 'parent.';
+$heapParams = \PMVC\get($heapData, 'params');
+$heapProperties = \PMVC\get($heapData, 'properties');
+$heapEvents = \PMVC\get($heapData, 'events', []); 
+$event = $view->get('event');
+$b = $view->get('b');
+$parent = $view->get('disableIframe') ? '' : 'parent.';
 ?>
 <!-- Heap -->
 <?php if (!empty($heapId)) {?>
@@ -24,7 +30,9 @@ if ('undefined' === typeof heap) {
 (function(){
     var params = <?php echo json_encode($heapParams)?>;
     params.location = decodeURIComponent(<?php echo $parent?>document.URL);
-    heap.track('<?php echo $event?>', params);
+<?php foreach($heapEvents as $e) { ?>
+    heap.track('<?php echo $e['event']?>', params);
+<?php }?>
 })();
 </script>
 <!-- End Heap -->

@@ -4,7 +4,7 @@
 <?php
 $enabled = $this->get('enabled');
 foreach($enabled as $name) {
-    include($name.'.html');
+    \PMVC\l($file);
 }
 ?>
 </body></html>
