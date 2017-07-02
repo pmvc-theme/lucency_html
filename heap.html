@@ -29,11 +29,12 @@ if ('undefined' === typeof heap) {
 <script type="text/javascript">
 (function(){
     var params = <?php echo json_encode($heapParams)?>;
+    var urlDecode = decodeURIComponent;
 <?php if ($parent) { ?>
-    params.location = decodeURIComponent(<?php echo $parent?>document.URL);
+    params.location = urlDecode(<?php echo $parent?>document.URL);
 <?php } else {?>
-    params.location = decodeURIComponent(document.referrer);
-    params.tagUrl = decodeURIComponent(document.URL);
+    params.location = urlDecode(document.referrer);
+    params.tagUrl = urlDecode(document.URL);
 <?php }?>
 <?php foreach($heapEvents as $e) { ?>
     heap.track('<?php echo $e['event']?>', params);
