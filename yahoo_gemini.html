@@ -6,7 +6,7 @@ $view = \PMVC\plug('view');
 
 $yGeminiData = \PMVC\value(
     $view->get('data'),
-    ['lucency', 'heap']
+    ['lucency', 'yahoo_gemini']
 );
 
 $yTagUrl = \PMVC\get($yGeminiData, 'tagUrl');
