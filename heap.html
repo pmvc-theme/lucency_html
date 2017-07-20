@@ -4,7 +4,10 @@ namespace PMVC\Theme\lucency_html;
 
 $view = \PMVC\plug('view');
 
-$heapData = \PMVC\value($view->get('data'), ['lucency', 'heap']);
+$heapData = \PMVC\value(
+    $view->get('data'),
+    ['lucency', 'heap']
+);
 $heapId = \PMVC\get($heapData, 'id');
 // https://heapanalytics.com/docs/custom-api#track
 $heapParams = \PMVC\get($heapData, 'params');
