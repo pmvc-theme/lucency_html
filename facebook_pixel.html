@@ -4,7 +4,12 @@ namespace PMVC\Theme\lucency_html;
 
 $view = \PMVC\plug('view');
 
-$fbPixelUrl = $view->get('fbPixelUrl');
+$fbData = \PMVC\value(
+    $view->get('data'),
+    ['lucency', 'facebook_pixel']
+);
+
+$fbPixelUrl = \PMVC\get($fbData, 'fbPixelUrl');
 if (!empty($fbPixelUrl)) {
 ?>
 <!-- FB Pixel -->
