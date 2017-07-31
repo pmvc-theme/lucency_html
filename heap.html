@@ -34,6 +34,7 @@ if ('undefined' === typeof heap) {
     var urlDecode = decodeURIComponent;
 <?php if ($parent) { ?>
     params.location = urlDecode(<?php echo $parent?>document.URL);
+    params.referrer = urlDecode(<?php echo $parent?>document.referrer);
 <?php } else {?>
     params.location = urlDecode(document.referrer);
     params.tagUrl = urlDecode(document.URL);
