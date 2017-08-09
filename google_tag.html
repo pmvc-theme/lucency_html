@@ -2,13 +2,20 @@
 
 namespace PMVC\Theme\lucency_html;
 
+$dlKey = uniqid('dl');
 $view = \PMVC\plug('view');
 
-$gtagId = $view->get('gtagId');
-$gtagParams = $view->get('gtagParams');
-$gtagEnv = $view->get('gtagEnv');
-$dlKey = uniqid('dl');
 $parent = $view->get('disableIframe') ? '' : 'parent.';
+$gtagData = \PMVC\value(
+    $view->get('data'),
+    ['lucency', 'google_tag']
+);
+
+$gtagEnv    = \PMVC\get($gtagData, 'gtagEnv');
+$gtagId     = \PMVC\get($gtagData, 'id');
+/*Data Layer*/
+$gtagParams = \PMVC\get($gtagData, 'params');
+
 ?>
 <!-- Google Tag Manager -->
 <script>
