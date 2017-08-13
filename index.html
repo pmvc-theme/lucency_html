@@ -2,6 +2,26 @@
 <head><link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon"></head>
 <body>[ !!lucency!! ]
 <?php
+if (!$this->get('disableIframe'))
+{
+    $vpvid = $this->get('vpvid');
+    if ($vpvid) {
+?>
+
+<script>
+if (parent.i13nDispatch) {
+    parent.i13nDispatch({
+        type: 'config/set',
+        params: {
+            vpvid: '<?php echo $vpvid?>'
+        }
+    });
+}
+</script>
+
+<?php
+    }
+}
 $enabled = $this->get('enabled');
 foreach($enabled as $name) {
     $file = __DIR__.'/'.$name.'.html';
